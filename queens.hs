@@ -30,8 +30,8 @@ mapSolution solution width = map columnVisual solution
     columnVisual idx = [ x == idx | x <- [1 .. width]]
 
 formatBoard :: [[Int]] -> Int -> [String]
-formatBoard solutions width = map (unlines . (\blob -> ("  " ++ take width ['A' .. 'Z']) : blob)) (indexRow (map (`visualize` width) solutions))
+formatBoard solutions width = map (unlines . (("  " ++ take width ['A' .. 'Z']) : )) (indexRow (map (`visualize` width) solutions))
   where
-    indexRow = map (\sol -> map (\(idx, row) -> show idx ++ "|" ++ row) (zip [1..] sol))
+    indexRow = map (\sol -> map (\(idx, row) -> idx : "|" ++ row) (zip ['A' ..] sol))
 
 main = putStrLn (unlines (formatBoard (nqueens 20) 20))
